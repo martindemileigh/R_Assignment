@@ -1,5 +1,5 @@
 # Demi-Leigh, Luanne and Luvuyo
-# This is a script containing some of teh figures that can be generated from the Ecofootprint data
+# This is a script containing some of the figures that can be generated from the Ecofootprint data
 # 25 June 2018
 
 # Load libraries ----------------------------------------------------------
@@ -15,7 +15,7 @@ countries <- read_csv("countries_ecological_footprint.csv")
 View(countries)
 
 
-# Potenitial figures ------------------------------------------------------
+# Potential figures ------------------------------------------------------
 
 
 # Top 20 countries with the highest EcoFootprint in Africa
