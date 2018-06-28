@@ -13,6 +13,8 @@ library(ggpubr)
 library(RColorBrewer)
 library(ggthemes)
 library(plotly)
+library(pgirmess)
+library(reshape2)
 
 # Load Data ---------------------------------------------------------------
 
@@ -154,3 +156,146 @@ annotate_figure(ecoprint,
                 left = text_grob("Country", color = "Black", rot = 90),
                 fig.lab = "Figure 1", fig.lab.face = "bold")
 
+# Stats -------------------------------------------------------------------
+
+
+# Assumptions -------------------------------------------------------------
+
+#Normality
+
+shapiro.test(africa$Total.Ecological.Footprint) #normal distributed
+
+shapiro.test(africa$Population..millions.) #normal distributed
+
+shapiro.test(africa$Total.Biocapacity) #not normal distributed
+
+#Homoscedasticity
+
+var(africa$Total.Ecological.Footprint)
+
+var(africa$Population..millions.)
+
+#(Total.Biocapacity vs Total.Ecological.Footprint)
+
+africa_sub <- africa %>% 
+  select(Total.Biocapacity, Total.Ecological.Footprint)
+
+#Kendall 
+
+cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
+         use = "everything", method = "pearson")
+
+africa_pearson <- cor(africa_sub)  
+
+#The simple linear regression 
+africa_lm <- lm(Total.Biocapacity ~ Total.Ecological.Footprint, data = africa)
+
+summary(africa_lm)  
+
+#linear regression graph
+
+slope <- round(africa_lm$coef[2], 3)
+
+p.val <- round(coefficients(summary(africa_lm))[2, 4], 3)
+
+r2 <- round(summary(africa_lm)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Total.Biocapacity, y = Total.Ecological.Footprint)) +
+  geom_point() +
+  annotate("text", x = 0, y = 5, label = paste0("slope == ", slope, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(title = "",
+       subtitle = "Linear regression",
+       x = "Total Biocapacity",
+       y = "Total Ecological Footprint")  
+
+#(Total.Biocapacity vs Population..millions.)
+
+africa_sub1 <- africa %>% 
+  select(Total.Biocapacity, Population..millions.)
+
+#Kendall 
+
+cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
+         use = "everything", method = "kendall")
+
+africa_kendall <- cor(africa_sub1)  
+
+#The simple linear regression 
+africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
+
+summary(africa_lm1)  
+
+#linear regression graph
+
+slope_1 <- round(africa_lm1$coef[2], 3)
+
+p.val_1 <- round(coefficients(summary(africa_lm1))[2, 4], 3)
+
+r2_1 <- round(summary(africa_lm1)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Population..millions., y = Total.Biocapacity)) +
+  geom_point() +
+  annotate("text", x = 55, y = 21, label = paste0("slope == ", slope_1, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 55, y = 19., label = paste0("italic(p) < ", p.val_1), parse = TRUE, hjust = 0) +
+  annotate("text", x = 55, y = 17, label = paste0("italic(r)^2 == ", r2_1), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(title = "",
+       subtitle = "Linear regression",
+       x = "Population millions.",
+       y = "Total.Biocapacity")  
+
+#(Total.Ecological.Footprint VS Population..millions.)
+
+africa_sub2 <- africa %>% 
+  select(Total.Ecological.Footprint, Population..millions.)
+
+#Kendall 
+
+cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
+         use = "everything", method = "kendall")
+
+eco_kendall <- cor(eco_sub2)  
+
+#The simple linear regression 
+eco_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = eco)
+
+summary(eco_lm2)  
+
+#linear regression graph
+
+slope_2 <- round(eco_lm$coef[2], 3)
+
+p.val_2 <- round(coefficients(summary(eco_lm))[2, 4], 3)
+
+r2_2 <- round(summary(eco_lm)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Population..millions., y = Total.Ecological.Footprint)) +
+  geom_point() +
+  annotate("text", x = 0, y = 5, label = paste0("slope == ", slope, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(title = "",
+       subtitle = "Linear regression",
+       x = "Population millions.",
+       y = "Total Ecological Footprint")  
+
+#correlation
+
+cor.test(africa$Total.Ecological.Footprint, africa$Total.Biocapacity)
+
+cor.test(africa$Total.Ecological.Footprint, africa$Population..millions.)
+
+cor.test(africa$Population..millions., africa$Total.Biocapacity)
+
+afr_sub <- africa%>% 
+  select(Total.Biocapacity:Total.Ecological.Footprint)
+
+afr_cor <- cor(afr_sub)
+
+afr_cor
+
+corrplot(afr_cor, method = "circle")
