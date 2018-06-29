@@ -83,7 +83,7 @@ geom_point(alpha = 1, size = 3) +
 africa %>% 
   group_by(Country) %>% 
   summarise(EcoFootprintMean = mean(Total.Ecological.Footprint, 
-                                    na.rm = TRUE)) %>% 
+  na.rm = TRUE)) %>% 
   ungroup() %>%
   mutate(Country = reorder(Country,EcoFootprintMean)) %>%
   arrange(desc(EcoFootprintMean)) %>%
