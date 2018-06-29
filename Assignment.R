@@ -204,12 +204,9 @@ var(africa$Total.Ecological.Footprint)
 
 #(Total.Biocapacity vs Total.Ecological.Footprint)
 
-africa_sub <- africa %>% 
-  select(Total.Biocapacity, Total.Ecological.Footprint)
-
 #Kendall 
-
-africa_kendall <- cor(africa_sub)  
+cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
+                use = "everything", method = "kendall")
 
 #The simple linear regression 
 africa_lm <- lm(Total.Biocapacity ~ Total.Ecological.Footprint, data = africa)
@@ -238,12 +235,10 @@ panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 #(Total.Biocapacity vs Population..millions.)
 
-africa_sub1 <- africa %>% 
-  select(Total.Biocapacity, Population..millions.)
-
 #Kendall 
 
-africa_kendall <- cor(africa_sub1)  
+cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
+          use = "everything", method = "kendall")  
 
 #The simple linear regression 
 
@@ -255,10 +250,8 @@ summary(africa_lm1)
 
 #Kendall 
 
-africa_sub2 <- africa %>% 
-  select(Total.Ecological.Footprint, Population..millions.)
-
-africa_kendall <- cor(africa_sub2, method = "kendall")  
+cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
+           use = "everything", method = "kendall")
 
 #The simple linear regression 
 africa_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = africa)
