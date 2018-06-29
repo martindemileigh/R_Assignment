@@ -22,33 +22,40 @@ eco <- read.csv("Ecological.txt")
 africa <- eco %>%
   mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
                                      ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped"))) %>%
-  
   filter(Country %in% c("South Africa", "Botswana", "Libya", "Gabon", "Congo", "Malawi", "Mauritius",
                         "Mauritius", "Egypt", "Togo", "Uganda"))
 
 
-           
+# Population --------------------------------------------------------------
 
+ggplot(africa, aes(x = reorder(Country, -Population..millions.), y = Population..millions., fill = Development_status)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(x = Country, y = 1, label = paste(' ',sep="")),
+            hjust=0, vjust=.5, size = 4, colour = "black",
+            fontface = 'italic') +
+  labs(x = 'Country', 
+       y = 'Population (millions)', 
+       title = 'Population of Country') +
+  coord_flip() + theme(legend.position = " ") 
+  
 # Country and Total ecological footprint ----------------------------------
 
 africa %>% 
-  group_by(Country, Development_status) %>% 
+  group_by(Country) %>% 
   summarise(EcoFootprintMean = mean(Total.Ecological.Footprint, 
                                     na.rm = TRUE)) %>% 
   ungroup() %>%
   mutate(Country = reorder(Country,EcoFootprintMean)) %>%
   arrange(desc(EcoFootprintMean)) %>%
-  ggplot(aes(x = Country, y = EcoFootprintMean, fill = Development_status)) +
-  geom_bar(stat="identity", show.legend = T)+
+  ggplot(aes(x = Country, y = EcoFootprintMean)) +
+  geom_bar(stat = "identity", fill = "#3288BD") +
   geom_text(aes(x = Country, y = 1, label = paste(' ',sep="")),
             hjust=0, vjust=.5, size = 4, colour = "black",
             fontface = 'italic') +
   labs(x = 'Countries', 
        y = 'Eco Footprint Mean', 
        title = 'Countries With Highest EcoFootprint') +
-  coord_flip() + theme(legend.position = "right") 
-
-
+ coord_flip() + theme(legend.position = " ") 
 
 # Country and Total Biocapacity -------------------------------------------
 
@@ -63,11 +70,23 @@ africa %>%
   geom_text(aes(x = Country, y = 1, label = paste0("(",BiocapacityMedian,")",sep="")),
             hjust=0, vjust=.5, size = 4, colour = 'black',
             fontface = 'italic') +
-  labs(x = 'Countries', 
-       y = 'Biocapacities', 
-       title = 'Countries With Highest Biocapacities') +
+  labs(x = 'Country', 
+       y = 'Total Biocapacity', 
+       title = 'Countries With Total Biocapacity') +
   coord_flip()  + theme(legend.position = "") 
 
+
+# Biocapacity Def ---------------------------------------------------------
+
+ggplot(africa, aes(x = reorder(Country, -Biocapacity.Deficit.or.Reserve), y = Biocapacity.Deficit.or.Reserve)) +
+  geom_bar(stat = "identity", fill = "#3288BD") +
+  geom_text(aes(x = Country, y = 1, label = paste(' ',sep="")),
+            hjust=0, vjust=.5, size = 4, colour = "black",
+            fontface = 'italic') +
+  labs(x = 'Country', 
+       y = 'Biocapacity (Deficit or Reserve)', 
+       title = 'Biocapacity (Deficit or Reserve) of each Country') +
+  coord_flip() + theme(legend.position = " ") 
 
 # HDI, Total Ecological Footprint and Population --------------------------
 
@@ -300,18 +319,18 @@ cor.test(africa$Population..millions., africa$Total.Biocapacity)
 afr_sub <- africa%>% 
   select(Total.Biocapacity:Total.Ecological.Footprint)
 
-afr_cor <- cor(afr_sub3)
+afr_cor <- cor(afr_sub)
 
 afr_cor
 
-corrplot(afr_cor, method = "color", 
-         tl.col = "black", addCoef.col = "black")
+corrplot(afr_cor, type = "upper", order="FPC",
+         col=brewer.pal(n=8, name="PuOr"))
 
-afr_sub2 <- africa%>% 
-  select(-Country, -Urban.Land, -Grazing.Land, -Forest.Land, -Fishing.Water, -Cropland, -HDI, -Countries.Required
-         , -GDP.per.Capita, -Data.Quality, -Earths.Required, -Biocapacity.Deficit.or.Reserve, -Region)
+afr_sub2 <- africa %>% 
+  select(-Population..millions., -Country, -Urban.Land, -Grazing.Land, -Forest.Land, -Fishing.Water, -Cropland, -HDI, -Countries.Required
+         , -GDP.per.Capita, -Data.Quality, -Earths.Required, -Biocapacity.Deficit.or.Reserve, -Region, -Development_status)
 
 afr_cor2 <- cor(afr_sub2)
 
-corrplot(afr_cor2, method = "color", 
-         tl.col = "black", addCoef.col = "black")
+corrplot(afr_cor2, type="upper", order="FPC",
+col=brewer.pal(n=8, name="PuOr"))
