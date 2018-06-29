@@ -20,7 +20,6 @@ africa <- eco %>%
 mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
                                      ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped")))
   
-
 # Total ecological footprint vs total biocapacity -------------------------
 ggplot(africa, aes(x = Total.Ecological.Footprint, y = Total.Biocapacity, colour = Country)) +
   geom_point(alpha = 1, size = 3) +
@@ -50,7 +49,6 @@ africa %>%
 
 # Country and Total Biocapacity -------------------------------------------
 
-
 africa %>%
   group_by(Country) %>%
   summarise(BiocapacityMean = mean(Total.Biocapacity, na.rm = TRUE)) %>%
@@ -67,8 +65,8 @@ africa %>%
   coord_flip()  + theme(legend.position = "none") +
   theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-# Biocapacity Def ---------------------------------------------------------
 
+# Biocapacity Def ---------------------------------------------------------
 
 ggplot(africa, aes(x = reorder(Country, -Biocapacity.Deficit.or.Reserve), y = Biocapacity.Deficit.or.Reserve)) +
   geom_bar(stat = "identity", fill = "#3288BD") +
@@ -144,6 +142,7 @@ Fish <- ggplot(africa, aes(x = reorder(Country, -Fish.Footprint),y = Fish.Footpr
 
 # Forest Footprint --------------------------------------------------------
 
+
 Forest <- ggplot(africa, aes(x = reorder(Country, -Forest.Footprint),y = Forest.Footprint)) +
   geom_bar(stat='identity', fill = "#8c6bb1") +
   geom_text(aes(x = Country, y = 0.15, label = paste0("(",Forest.Footprint,")",sep="")),
@@ -164,9 +163,6 @@ Grazing <- ggplot(africa, aes(x = reorder(Country, -Grazing.Footprint),y = Grazi
   labs(x = '', 
        y = 'Grazing Footprint') +
   coord_flip()  + theme(legend.position = "")
-
-ecoprint <- ggarrange(crop, Forest, Carbon, Grazing, Fish, labels = c("A", "B", "C", "D", "E")) 
-
 
 ecoprint <- ggarrange(crop, Forest, Carbon, Grazing, Fish, labels = c("A", "B", "C", "D", "E")) 
 
@@ -222,6 +218,7 @@ ggplot(data = africa, aes(x = Total.Biocapacity, y = Total.Ecological.Footprint)
 
 cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
           use = "everything", method = "kendall")  
+
 #The simple linear regression 
 africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
 
@@ -231,7 +228,9 @@ summary(africa_lm1)
 
 africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
 
-summary(africa_lm1) slope_1 <- round(africa_lm1$coef[2], 3)
+summary(africa_lm1) 
+
+slope_1 <- round(africa_lm1$coef[2], 3)
 
 p.val_1 <- round(coefficients(summary(africa_lm1))[2, 4], 3)
 
