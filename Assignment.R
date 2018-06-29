@@ -6,14 +6,9 @@
 # Libraries  --------------------------------------------------------------
 
 library(tidyverse)
-library(dplyr)
-library(corrplot)
 library(ggpubr)
+library(corrplot)
 library(RColorBrewer)
-library(ggthemes)
-library(plotly)
-library(pgirmess)
-library(reshape2)
 
 # Load Data ---------------------------------------------------------------
 
@@ -208,8 +203,6 @@ shapiro.test(africa$Total.Biocapacity) #not normal distributed
 
 var(africa$Total.Ecological.Footprint)
 
-var(africa$Population..millions.)
-
 #(Total.Biocapacity vs Total.Ecological.Footprint)
 
 africa_sub <- africa %>% 
@@ -220,7 +213,7 @@ africa_sub <- africa %>%
 cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
          use = "everything", method = "kendall")
 
-africa_pearson <- cor(africa_sub)  
+africa_kendall <- cor(africa_sub)  
 
 #The simple linear regression 
 africa_lm <- lm(Total.Biocapacity ~ Total.Ecological.Footprint, data = africa)
