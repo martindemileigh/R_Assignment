@@ -1,4 +1,4 @@
-#Luanne Thomas
+#Luanne Thomas, Demi-Lee Martin & Luvuyo Kani
 #26 June 2016
 #Statistical analysis of data
 
@@ -20,28 +20,34 @@ library(reshape2)
 
 eco <- read.csv("Ecological.txt")
 
-africa <- eco %>% 
+africa <- eco %>%
+  mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
+                                     ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped"))) %>%
+  
   filter(Country %in% c("South Africa", "Botswana", "Libya", "Gabon", "Congo", "Malawi", "Mauritius",
-                        "Mauritius", "Egypt", "Togo", "Uganda"))                             
+                        "Mauritius", "Egypt", "Togo", "Uganda"))
+
+
+           
 
 # Country and Total ecological footprint ----------------------------------
 
 africa %>% 
-  group_by(Country) %>% 
+  group_by(Country, Development_status) %>% 
   summarise(EcoFootprintMean = mean(Total.Ecological.Footprint, 
                                     na.rm = TRUE)) %>% 
   ungroup() %>%
   mutate(Country = reorder(Country,EcoFootprintMean)) %>%
   arrange(desc(EcoFootprintMean)) %>%
-  ggplot(aes(x = Country, y = EcoFootprintMean)) +
-  geom_bar(stat = "identity", fill = "#3288BD")+
+  ggplot(aes(x = Country, y = EcoFootprintMean, fill = Development_status)) +
+  geom_bar(stat="identity", show.legend = T)+
   geom_text(aes(x = Country, y = 1, label = paste(' ',sep="")),
             hjust=0, vjust=.5, size = 4, colour = "black",
             fontface = 'italic') +
   labs(x = 'Countries', 
        y = 'Eco Footprint Mean', 
        title = 'Countries With Highest EcoFootprint') +
-  coord_flip() + theme(legend.position = " ") 
+  coord_flip() + theme(legend.position = "right") 
 
 
 
@@ -87,8 +93,9 @@ by_count2 <- africa %>%
 
 ggplot(by_count2, aes(x = HDI, y = BiocapacityMedian, color = Country, size = MedianPop)) +
   geom_point(alpha=0.7) + 
-  ylab("Biocapacity") + labs(title="Biocapacity Vs Human Development Index") 
-+ scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D")) + xlab("") + ylab("")
+  ylab("Biocapacity") + labs(title="Biocapacity Vs Human Development Index")+
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D", "#FB8072", "#BEBADA")) + 
+  xlab("Human Development Index") + ylab("Biocapacity")
 
 
 # Cropland footprint ----------------------------------------------
