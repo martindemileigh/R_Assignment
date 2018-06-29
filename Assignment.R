@@ -7,7 +7,6 @@
 
 library(tidyverse)
 library(dplyr)
-library(dbplyr)
 library(corrplot)
 library(ggpubr)
 library(RColorBrewer)
@@ -165,7 +164,7 @@ annotate_figure(ecoprint,
 
 shapiro.test(africa$Total.Ecological.Footprint) #normal distributed
 
-shapiro.test(africa$Population..millions.) #normal distributed
+shapiro.test(africa$Population..millions.) #not normal distributed
 
 shapiro.test(africa$Total.Biocapacity) #not normal distributed
 
@@ -183,7 +182,7 @@ africa_sub <- africa %>%
 #Kendall 
 
 cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
-         use = "everything", method = "pearson")
+         use = "everything", method = "kendall")
 
 africa_pearson <- cor(africa_sub)  
 
@@ -257,20 +256,20 @@ africa_sub2 <- africa %>%
 cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
          use = "everything", method = "kendall")
 
-eco_kendall <- cor(eco_sub2)  
+africa_kendall <- cor(africa_sub2)  
 
 #The simple linear regression 
-eco_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = eco)
+africa_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = africa)
 
-summary(eco_lm2)  
+summary(africa_lm2)  
 
 #linear regression graph
 
-slope_2 <- round(eco_lm$coef[2], 3)
+slope_2 <- round(africa_lm2$coef[2], 3)
 
-p.val_2 <- round(coefficients(summary(eco_lm))[2, 4], 3)
+p.val_2 <- round(coefficients(summary(africa_lm2))[2, 4], 3)
 
-r2_2 <- round(summary(eco_lm)$r.squared, 3)
+r2_2 <- round(summary(africa_lm2)$r.squared, 3)
 
 ggplot(data = africa, aes(x = Population..millions., y = Total.Ecological.Footprint)) +
   geom_point() +
@@ -294,8 +293,18 @@ cor.test(africa$Population..millions., africa$Total.Biocapacity)
 afr_sub <- africa%>% 
   select(Total.Biocapacity:Total.Ecological.Footprint)
 
-afr_cor <- cor(afr_sub)
+afr_cor <- cor(afr_sub3)
 
 afr_cor
 
-corrplot(afr_cor, method = "circle")
+corrplot(afr_cor, method = "color", 
+         tl.col = "black", addCoef.col = "black")
+
+afr_sub2 <- africa%>% 
+  select(-Country, -Urban.Land, -Grazing.Land, -Forest.Land, -Fishing.Water, -Cropland, -HDI, -Countries.Required
+         , -GDP.per.Capita, -Data.Quality, -Earths.Required, -Biocapacity.Deficit.or.Reserve, -Region)
+
+afr_cor2 <- cor(afr_sub2)
+
+corrplot(afr_cor2, method = "color", 
+         tl.col = "black", addCoef.col = "black")
