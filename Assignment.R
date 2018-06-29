@@ -23,8 +23,6 @@ mutate(Development_status = ifelse(HDI >= 0.7, "Developed",
 
 # Total ecological footprint vs total biocapacity -------------------------
 
-
-
 ggplot(africa, aes(x = Total.Ecological.Footprint, y = Total.Biocapacity, colour = Country)) +
 geom_point(alpha = 1, size = 3) +
   xlab("Total Ecological Footprint") + ylab("Total Biocapacity") +
@@ -105,10 +103,10 @@ africa %>%
             MeanPop = mean(Population..millions.)) %>% 
 ggplot(aes(x = HDI, y = BiocapacityMean, color = Country, size = MeanPop)) +
   geom_point(alpha=0.7) + 
-  ylab("Biocapacity") + labs(caption = "Figure 5. The relationship between the total biocapacity  and the human development index")+
+  ylab("Biocapacity") +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D", "#FB8072", "#BEBADA", "#6a51a3")) + 
-  xlab("Human Development Index") + ylab("Biocapacity") +
-  theme_bw() + theme(plot.caption = element_text(hjust = 0.5), panel.border = element_blank(), panel.grid.major = element_blank(),
+  xlab("Human Development Index") + ylab("Total Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 # Cropland footprint ----------------------------------------------
@@ -187,7 +185,6 @@ annotate_figure(ecoprint, left = text_grob("Country", color = "Black", rot = 90)
 
 # Stats -------------------------------------------------------------------
 
-
 # Assumptions -------------------------------------------------------------
 
 #Normality
@@ -227,11 +224,11 @@ ggplot(data = africa, aes(x = Total.Biocapacity, y = Total.Ecological.Footprint)
   annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val), parse = TRUE, hjust = 0) +
   annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2), parse = TRUE, hjust = 0) +
   stat_smooth(method = "lm", colour = "salmon") +
-  labs(caption = "Figure 7. Linear regression model on the total biocapacity and the total ecological footprint of each country",
-       x = "Total Biocapacity",
+  labs(x = "Total Biocapacity",
        y = "Total Ecological Footprint") +
-theme_bw() + theme(plot.caption = element_text(hjust = 0.5), panel.border = element_blank(), panel.grid.major = element_blank(),
+theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
 panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
 
 #(Total.Biocapacity vs Population..millions.)
 
@@ -239,12 +236,30 @@ panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
           use = "everything", method = "kendall")  
-
 #The simple linear regression 
 
 africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
 
 summary(africa_lm1)  
+
+#linear regression graph
+
+slope_1 <- round(africa_lm1$coef[2], 3)
+
+p.val_1 <- round(coefficients(summary(africa_lm1))[2, 4], 3)
+
+r2_1 <- round(summary(africa_lm1)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Population..millions., y = Total.Biocapacity)) +
+  geom_point() +
+  annotate("text", x = 50, y = 21, label = paste0("slope == ", slope_1, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 50, y = 19., label = paste0("italic(p) < ", p.val_1), parse = TRUE, hjust = 0) +
+  annotate("text", x = 50, y = 17, label = paste0("italic(r)^2 == ", r2_1), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(x = "Population (million)",
+       y = "Total.Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 #(Total.Ecological.Footprint VS Population..millions.)
 
@@ -260,27 +275,6 @@ summary(africa_lm2)
 
 #linear regression graph
 
-slope_1 <- round(africa_lm1$coef[2], 3)
-
-p.val_1 <- round(coefficients(summary(africa_lm1))[2, 4], 3)
-
-r2_1 <- round(summary(africa_lm1)$r.squared, 3)
-
-ggplot(data = africa, aes(x = Population..millions., y = Total.Biocapacity)) +
-  geom_point() +
-  annotate("text", x = 55, y = 21, label = paste0("slope == ", slope_1, "~(min/min)"), parse = TRUE, hjust = 0) +
-  annotate("text", x = 55, y = 19., label = paste0("italic(p) < ", p.val_1), parse = TRUE, hjust = 0) +
-  annotate("text", x = 55, y = 17, label = paste0("italic(r)^2 == ", r2_1), parse = TRUE, hjust = 0) +
-  stat_smooth(method = "lm", colour = "salmon") +
-  labs(caption = "Figure 8. Linear regression model on the population and the total biocapacity",
-       x = "Population (millions)",
-       y = "Total.Biocapacity") +
-  theme_bw() + theme(plot.caption = element_text(hjust = 0.5), panel.border = element_blank(), panel.grid.major = element_blank(),
-                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-
-
-#linear regression graph
-
 slope_2 <- round(africa_lm2$coef[2], 3)
 
 p.val_2 <- round(coefficients(summary(africa_lm2))[2, 4], 3)
@@ -293,10 +287,9 @@ ggplot(data = africa, aes(x = Population..millions., y = Total.Ecological.Footpr
   annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val_2), parse = TRUE, hjust = 0) +
   annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2_2), parse = TRUE, hjust = 0) +
   stat_smooth(method = "lm", colour = "salmon") +
-  labs(caption = "Figure 9. Linear regression model on the population and the total ecological footprint",
-       x = "Population millions.",
+  labs(x = "Population (million)",
        y = "Total Ecological Footprint") +
-  theme_bw() + theme(plot.caption = element_text(hjust = 0.5), panel.border = element_blank(), panel.grid.major = element_blank(),
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 #correlation
@@ -309,7 +302,7 @@ afr_cor <- cor(afr_sub)
 afr_cor
 
 corrplot(afr_cor, type = "upper", order="FPC",
-         col=brewer.pal(n=8, name="PuOr"))
+         col=brewer.pal(n=10, name="PuOr"))
 
 afr_sub2 <- africa %>% 
   select(-Population..millions., -Country, -Urban.Land, -Grazing.Land, -Forest.Land, -Fishing.Water, -Cropland, -HDI, -Countries.Required
@@ -318,4 +311,4 @@ afr_sub2 <- africa %>%
 afr_cor2 <- cor(afr_sub2)
 
 corrplot(afr_cor2, type="upper", order="FPC",
-col=brewer.pal(n=8, name="PuOr"))
+col=brewer.pal(n=10, name="PuOr"))
