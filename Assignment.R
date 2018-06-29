@@ -7,25 +7,25 @@
 
 library(tidyverse)
 library(dplyr)
-library(corrplot)
 library(ggpubr)
+library(corrplot)
 library(RColorBrewer)
-library(ggthemes)
-library(plotly)
-library(pgirmess)
-library(reshape2)
 
 # Load Data ---------------------------------------------------------------
 
 eco <- read.csv("Ecological.txt")
 
 africa <- eco %>%
-  mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
-                                     ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped"))) %>%
-  filter(Country %in% c("South Africa", "Botswana", "Libya", "Gabon", "Congo", "Malawi", "Mauritius",
-                        "Mauritius", "Egypt", "Togo", "Uganda"))
+  filter(Country %in% c("South Africa", "Botswana", "Kenya", "Gabon", "Congo", "Malawi", "Mauritius", "Egypt", "Togo", "Uganda")) %>% 
+mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
+                                     ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped")))
+  
+
+# Total ecological footprint vs total biocapacity -------------------------
 
 
+
+<<<<<<< HEAD
 # Population --------------------------------------------------------------
 
 ggplot(africa, aes(x = reorder(Country, -Population..millions.), y = Population..millions., fill = Development_status)) +
@@ -37,6 +37,13 @@ ggplot(africa, aes(x = reorder(Country, -Population..millions.), y = Population.
        y = 'Population (millions)', 
        title = 'Population of Country') +
   coord_flip() + theme(legend.position = "right") 
+=======
+ggplot(africa, aes(x = Total.Ecological.Footprint, y = Total.Biocapacity, colour = Country)) +
+geom_point(alpha = 1, size = 3) +
+  xlab("Total Ecological Footprint") + ylab("Total Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
   
 # Country and Total ecological footprint ----------------------------------
 
@@ -52,29 +59,45 @@ africa %>%
   geom_text(aes(x = Country, y = 1, label = paste(' ',sep="")),
             hjust=0, vjust=.5, size = 4, colour = "black",
             fontface = 'italic') +
+<<<<<<< HEAD
   labs(x = 'Countries', 
        y = 'Eco Footprint Mean', 
        title = 'Countries With Highest EcoFootprint') +
  coord_flip() + theme(legend.position = " ") 
+=======
+  labs(x = 'Country', 
+       y = 'Total Ecological Footprint Mean') +
+  coord_flip() + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # Country and Total Biocapacity -------------------------------------------
 
 africa %>%
   group_by(Country) %>%
-  summarise(BiocapacityMedian = median(Total.Biocapacity, na.rm = TRUE)) %>%
+  summarise(BiocapacityMean = mean(Total.Biocapacity, na.rm = TRUE)) %>%
   ungroup() %>%
-  mutate(Country = reorder(Country,BiocapacityMedian)) %>%
-  arrange(desc(BiocapacityMedian)) %>%
-  ggplot(aes(x = Country,y = BiocapacityMedian)) +
+  mutate(Country = reorder(Country,BiocapacityMean)) %>%
+  arrange(desc(BiocapacityMean)) %>%
+  ggplot(aes(x = Country,y = BiocapacityMean)) +
   geom_bar(stat='identity', fill = "#3288BD") +
-  geom_text(aes(x = Country, y = 1, label = paste0("(",BiocapacityMedian,")",sep="")),
+  geom_text(aes(x = Country, y = 1, label = paste0("(",BiocapacityMean,")",sep="")),
             hjust=0, vjust=.5, size = 4, colour = 'black',
             fontface = 'italic') +
   labs(x = 'Country', 
+<<<<<<< HEAD
        y = 'Total Biocapacity', 
        title = 'Countries With Total Biocapacity') +
   coord_flip()  + theme(legend.position = "") 
 
+=======
+       y = 'Total Biocapacity mean') +
+    coord_flip()  + theme(legend.position = "none") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # Biocapacity Def ---------------------------------------------------------
 
@@ -84,14 +107,23 @@ ggplot(africa, aes(x = reorder(Country, -Biocapacity.Deficit.or.Reserve), y = Bi
             hjust=0, vjust=.5, size = 4, colour = "black",
             fontface = 'italic') +
   labs(x = 'Country', 
+<<<<<<< HEAD
        y = 'Biocapacity (Deficit or Reserve)', 
        title = 'Biocapacity (Deficit or Reserve) of each Country') +
   coord_flip() + theme(legend.position = " ") 
+=======
+       y = 'Biocapacity (Deficit or Reserve)') +
+  coord_flip() + theme(legend.position = " ") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # HDI, Total Ecological Footprint and Population --------------------------
 
-by_count <- africa %>% 
+africa %>% 
   group_by(HDI, Country) %>% 
+<<<<<<< HEAD
   summarise(EcofooMedian = median(Total.Ecological.Footprint),
             PopMedian = median(Population..millions.)) 
 
@@ -101,20 +133,36 @@ ggplot(by_count, aes(x = HDI, y = EcofooMedian, color = Country, size = PopMedia
   geom_point(alpha = 0.7)  + ylab("Eco-Footprint") + labs(title="Eco-Footprint Vs Human Development Index") + 
   xlab("Human Development Index") + ylab("Ecological Footprint Median")
 
+=======
+  summarise(EcofooMean = mean(Total.Ecological.Footprint),
+            PopMean = mean(Population..millions.)) %>% 
+  ggplot(aes(x = HDI, y = EcofooMean, color = Country, size = PopMean)) +
+  geom_point(alpha = 0.7)  + ylab("Eco-Footprint") + 
+  xlab("Human Development Index") + ylab("Ecological Footprint Mean")+
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # HDI, Biocapacity and Population -----------------------------------------
 
-by_count2 <- africa %>% 
+africa %>% 
   group_by(HDI, Country) %>%
-  summarise(BiocapacityMedian = median(Total.Biocapacity),
-            MedianPop = median(Population..millions.))
-
-ggplot(by_count2, aes(x = HDI, y = BiocapacityMedian, color = Country, size = MedianPop)) +
+  summarise(BiocapacityMean = mean(Total.Biocapacity),
+            MeanPop = mean(Population..millions.)) %>% 
+ggplot(aes(x = HDI, y = BiocapacityMean, color = Country, size = MeanPop)) +
   geom_point(alpha=0.7) + 
+<<<<<<< HEAD
   ylab("Biocapacity") + labs(title="Biocapacity Vs Human Development Index")+
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D", "#FB8072", "#BEBADA")) + 
   xlab("Human Development Index") + ylab("Biocapacity")
 
+=======
+  ylab("Biocapacity") + labs(caption = "Figure 5. The relationship between the total biocapacity  and the human development index")+
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D", "#FB8072", "#BEBADA", "#6a51a3")) + 
+  xlab("Human Development Index") + ylab("Biocapacity") +
+  theme_bw() + theme(plot.caption = element_text(hjust = 0.5), panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # Cropland footprint ----------------------------------------------
 
@@ -176,10 +224,15 @@ Grazing <- ggplot(africa, aes(x = reorder(Country, -Grazing.Footprint),y = Grazi
 
 ecoprint <- ggarrange(crop, Forest, Carbon, Grazing, Fish, labels = c("A", "B", "C", "D", "E")) 
 
+<<<<<<< HEAD
 annotate_figure(ecoprint,
                 top = text_grob("Distribution of each Eco-print", color = "Black", face = "bold", size = 14),
                 left = text_grob("Country", color = "Black", rot = 90),
                 fig.lab = "Figure 1", fig.lab.face = "bold")
+=======
+annotate_figure(ecoprint, left = text_grob("Country", color = "Black", rot = 90),
+                fig.lab = "", fig.lab.face = "bold")
+>>>>>>> 137ffbcca32e232ac1fcf4e239f1e3faa99d64a9
 
 # Stats -------------------------------------------------------------------
 
@@ -198,19 +251,11 @@ shapiro.test(africa$Total.Biocapacity) #not normal distributed
 
 var(africa$Total.Ecological.Footprint)
 
-var(africa$Population..millions.)
-
 #(Total.Biocapacity vs Total.Ecological.Footprint)
 
-africa_sub <- africa %>% 
-  select(Total.Biocapacity, Total.Ecological.Footprint)
-
 #Kendall 
-
 cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
-         use = "everything", method = "kendall")
-
-africa_pearson <- cor(africa_sub)  
+                use = "everything", method = "kendall")
 
 #The simple linear regression 
 africa_lm <- lm(Total.Biocapacity ~ Total.Ecological.Footprint, data = africa)
@@ -238,20 +283,27 @@ ggplot(data = africa, aes(x = Total.Biocapacity, y = Total.Ecological.Footprint)
 
 #(Total.Biocapacity vs Population..millions.)
 
-africa_sub1 <- africa %>% 
-  select(Total.Biocapacity, Population..millions.)
-
 #Kendall 
 
 cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
-         use = "everything", method = "kendall")
-
-africa_kendall <- cor(africa_sub1)  
+          use = "everything", method = "kendall")  
 
 #The simple linear regression 
 africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
 
 summary(africa_lm1)  
+
+#(Total.Ecological.Footprint VS Population..millions.)
+
+#Kendall 
+
+cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
+           use = "everything", method = "kendall")
+
+#The simple linear regression 
+africa_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = africa)
+
+summary(africa_lm2)  
 
 #linear regression graph
 
@@ -271,23 +323,6 @@ ggplot(data = africa, aes(x = Population..millions., y = Total.Biocapacity)) +
        subtitle = "Linear regression",
        x = "Population millions.",
        y = "Total.Biocapacity")  
-
-#(Total.Ecological.Footprint VS Population..millions.)
-
-africa_sub2 <- africa %>% 
-  select(Total.Ecological.Footprint, Population..millions.)
-
-#Kendall 
-
-cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
-         use = "everything", method = "kendall")
-
-africa_kendall <- cor(africa_sub2)  
-
-#The simple linear regression 
-africa_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = africa)
-
-summary(africa_lm2)  
 
 #linear regression graph
 
@@ -309,12 +344,6 @@ ggplot(data = africa, aes(x = Population..millions., y = Total.Ecological.Footpr
        y = "Total Ecological Footprint")  
 
 #correlation
-
-cor.test(africa$Total.Ecological.Footprint, africa$Total.Biocapacity)
-
-cor.test(africa$Total.Ecological.Footprint, africa$Population..millions.)
-
-cor.test(africa$Population..millions., africa$Total.Biocapacity)
 
 afr_sub <- africa%>% 
   select(Total.Biocapacity:Total.Ecological.Footprint)
