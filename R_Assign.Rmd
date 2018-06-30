@@ -1,0 +1,472 @@
+---
+title: 'Ecological Footprint and Biocapacity: Evaluation of African countries emmision '
+author: "Demi-Leigh Martin, Luanne Thomas, Luvuyo Kani"
+date: "29 June 2018"
+output:
+  word_document: default
+  html_document: default
+monofont: PT Mono
+mainfont: Arial
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##Abstract
+
+Humanity is currently in a state of overshoot as we use more resources than the Earth can provide. The Ecological Footprint is a metric that measures the demand of humans on the biosphere. Ecological Footprint is often compared to the biocapacity. Biocapacity refers to the amount of productive area that is available for the provision of resources. The Human Development Index (HDI) measures the average achievement of human development based on income, education, and health. The aim of this investigation was to assess the relationship between the Ecological footprint and biocapacity of various countries within Africa and to use statistical analyses to determine whether or not these countries are running at a biocapacity deficit or reserve.  (Methods)(Main trends)(Discussion)
+
+**Keywords**: Sustainability, Human Development, Africa, Ecosystem Degradation, Resource Consumption, Earth Overshoot, Population Growth 
+
+\newpage
+
+##Introduction
+
+Future economic successes will rely heavily on the accessibility of ecosystem services due to current trends that move us towards peak energy and climate change (Wackernagel et al. 2006). These will combine with food shortages, biodiversity loss, soil erosion and freshwater stress in order to meet global supply and demand for essential resources. Currently, humanity is already in a state of “overshoot”, using more resources than the Earth can provide (Heinberg 2007; Ewing et al. 2010). Without a method of comparing the demand to the supply of ecological services, policymakers may ignore the threat of overshoot. In order to develop a clear understanding of the risks, clear metrics are required to assist in reaching a consensus on how this should be addressed. About 15 years ago, the Ecological Footprint was developed to provide such a metric. All of humanity uses more ecological resources and services than nature can renew (Shahid 2016; Earth Overshoot Day 2018). Earth Overshoot Day marks the date when all of humanity has used more natural resources than the planet can regenerate in a year. Earth Overshoot Day is hosted and determined by the Global Footprint Network. The Global Footprint Network was established in 2003 to assure human well-being by decreasing the pressure on critical ecosystems and ending overshoot (Wackernagel 2002; Ewing et al. 2010). 
+
+When the resource consumption and water absorption of humanity exceed natures supply, this ecological overshoot threatens human well-being (Huijbregts et al. 2008; Ewing et al. 2010). Ecological overshoot slowly destroys the natural capital of the planet, the ultimate means of livelihood for humanity. Ecological Footprint is a measure of the impacts that human demand activities have on the biosphere (Lewin 2000; Huijbregts et al. 2008; Ewing et al. 2010). It is a direct measurement of the biologically productive land and water area required to produce the resources consumed. A biologically productive area is land and water areas that support photosynthetic activity and biomass accumulation that is used by humans. This does not include arid regions, open surfaces, and other low productive surfaces. The Ecological Footprint may also be compared to the biological capacity, also known as biocapacity. Biocapacity is the amount of productive area available to generate these resources and absorb waste. In order to compare the bioproductivity of different countries around the world, the land and water area is scaled to a global hectare based on bioproductivity (Lewin 2000; Ewing et al. 2010). Biologically productive land or water and the productivity of an area are the two main factors that determine biocapacity. The area harvested under the most dominant crops (e.g cereal) has remained relatively constant since 1961, while the yield per hectare has doubled. Recently, the area under cultivation has increased rapidly and the number of large areas that humanity is using for single plant species and agriculture has increased resulting in less land being undisturbed. Careful management can ensure that anthropogenic factors such as urbanisation, erosion, deforestation, and pollution do not decrease productive areas. The development of many of the technological inputs such as mechanised agricultural equipment comes at the expense of an increased Ecological Footprint due to the additional energy and resources required. In future, these technologies may decrease biocapacity by increasing topsoil runoff, reducing water availability and decreasing biodiversity, while increasing the degradation of surrounding areas (Ewing et al. 2010).
+
+One of the primary driving forces of the Ecological Footprint is population growth and this may play an essential role in determining the level of human development within a country or region (Ehrlich and Holdren 1971; Ewing et al. 2010).  Despite being one of the factors that determine the Ecological Footprint, the exponential growth of the global population plays a major role in humanity’s total Ecological Footprint. Future environmental demands can be determined by addressing and understanding how the rate of population growth varies across various income, geographical and cultural groups. Since 1980 a drastic increase of 113% has occurred in populations in low-income countries, while middle-income countries have had a 64% increase and populations in high-income countries have only increased by 24% (Ewing et al. 2010).
+
+Understanding that human economy is merely a subset of ecology is important in identifying the economic links between nature, human activities and biodiversity (Millennium Ecosystem Assessment 2005; Ewing et al. 2010). The Millennium Ecosystem Assessment is one of the projects in place to analyse the economic benefits of biodiversity and weighs the cost of effective policies on declining biodiversity. The Millennium Ecosystem Assessment recognises three types of ecosystem services: (1) Provisioning, (2) Regulating and (3) Cultural. Provisioning services include food, timber, and fresh water while Regulating services encompasses water purification and disease, flood and climate regulation. Cultural services include educational, recreational and spiritual services (The Economics of Ecosystems and Biodiversity 2009, Ewing et al. 2010).  Some of the flows of provisioning services can be quantified by the biocapacity within the National Footprint Accounts (Ewing et al. 2010). 
+
+When humanity’s demand on the biosphere exceeds what the biosphere can renewably supply, populations in low-income countries suffer first despite having an abundance of natural resources (Ewing et al. 2010). On a global scale, some of the lowest Ecological Footprints are found in countries within Africa, Latin America, and South East Asia. The availability and usability of resources from these Ecological Footprints are often too small to meet the basic requirements for food, shelter, sanitation, and health. These regions require an increase in their accessibility to natural resources in order to reduce poverty, hunger, and disease in these regions. The exponential population growth and the increasing consumption of natural resources by the rest of the world make it extremely hard to manage sustainably. The Human Development Index (HDI) is a measurement of the average achievement in key factors of human development (Adnand and Sen 2000). These include a long and disease-free life, being knowledgeable and having a decent standard of living. The HDI was developed to place emphasis on the idea of people and their capabilities as an ultimate criterion for assessing the development status of a country, rather than focusing solely on the economic growth of the country. An HDI of 0.8 or above is defined by The United Nations Development Programme (UNDP) as a high level of development (Ewing et al. 2010). The average productive area available for each person on the planet is recognised by the UNDP as 1.8 global hectares. Countries meet two of the minimum requirements for global sustainable development if they have an HDI of 0.8 or higher and a Footprint of 1.8 global hectares (Adnand and Sen 2000). 
+
+Africa is the second largest and it is the second most populous country in the world (Sayre 1999). Africa covers about six percent of the Earth’s surface area and 20% of this is the land area. It has an urban growth rate of approximately four percent and this is the highest in the world (Clancy 2008). This implies that the population will rise to 724 million by 2030. Africa comprises of 2 960 million hectares of land and the National Footprint Accounts includes 1 815 million of this as bioproductive area (Ewing et al. 2010). 627 million 245 million hectares of the bioproductive land area is forested and cropland, respectively. Infrastructure occupies 31 million hectares of the continent, while grasslands occupy 911 million hectares of land area. Africa borders the Mediterranean Sea, Atlantic, and the Indian Ocean and has 115 million hectares of continental shelf, while 67 million hectares is occupied by inland water. The total biocapacity of Africa is 1 423 million global hectares, but the available biocapacity per person varies greatly among the different African countries (Ewing et al. 2010). 
+
+The link between the well-being of humanity is highly dependent upon biological capital (Ewing et al. 2010). By accounting for biocapacity available for use and the biocapacity used by a region or country, it will provide insights on identifying possible opportunities or limitations in achieving human development goals. Ecological degradation leads to a loss or decline in human well-being and this cannot be reversed once resource reserves have been severely depleted. The Ecological Footprint data was therefore chosen to establish the relationship between Total Ecological Footprint and biocapacity with increasing population. The dataset includes the HDI which was established to measure the human development of countries based on income, health, and development. The traditional method of assessing human development is based solely on income, using the Gross domestic product (GDP) per capita. Using the Ecological Footprint data we can assess whether or not African countries advance in human development while remaining within the ecological limits of the country. Using this data we can assess biocapacity deficits and reserves and determine the extent of overshoot on natural resource supplies within the African region. The Ecological Footprint data allows us to contrast how ecological footprint and biocapacity differs across the African continent and test whether there are substantial differences among countries. Overall, the aim of this investigation was to assess the relationship between the Total Ecological footprint and the biocapacity of various countries within Africa and to determine whether or not these countries have an Ecological Footprint that is lower than their biocapacity. This will serve as an indication that the demand of these countries remains within the bounds of the ecological resource supply. It was hypothesised that the exponential population growth and the increasing consumption of natural resources in African countries lead to a direct correlation between the Ecological Footprint and the biocapacity of a country. In other words, as Ecological footprint increases, biocapacity and HDI decreases
+
+
+## Method and Materials 
+
+*Source of data*
+
+The EcoFootprint network data was collected from the Global Footprint Network (http://data.footprintnetwork.org). The National Footprint Account (NFAs) measures the ecological resource use and resource capacity of countries over time. The NFAs calculate the footprints based on data points per country per year. The calculations are primarily based on data sets from the United Nations, which include publications by the Food and Agriculture Organization, United Nations Commodity Trade Statistics Database, and the UN Statistics Division, as well as the International Energy Agency. 
+
+*Pre-processing*
+
+All data analysis and visualisation was conducted in R Studio 1.1.423 (http://www.rstudio.com/). A new project was created from version control and git, where a project was cloned from a Git repository (https://github.com/martindemileigh/R_Assignment) from GitHub (https://github.com/). To begin the analysis, the required packages were installed and the libraries were loaded. 
+
+```{r message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(corrplot)
+library(RColorBrewer)
+```
+
+The data was loaded onto R Studio and filtered to only select a random selection of ten countries from Africa. Hereafter, a new column was added to display each country’s human development status. 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+eco <- read.csv("Ecological.txt")
+
+africa <- eco %>%
+  filter(Country %in% c("South Africa", "Botswana", "Kenya", "Gabon", "Congo", "Malawi", "Mauritius", "Egypt", "Togo", "Uganda")) %>% 
+mutate(Development_status = ifelse(HDI >= 0.7, "Developed", 
+                                     ifelse(HDI >= 0.5 & HDI < 0.69, "Developing", "Underdeveloped")))
+  
+```
+
+Various graphs were produced to illustrate the relationship between the numerous variables. The data set was grouped and the variables were summarised to calculate the median or mean of each variable, respectively.
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+# Total ecological footprint vs total biocapacity -------------------------
+
+ggplot(africa, aes(x = Total.Ecological.Footprint, y = Total.Biocapacity, colour = Country)) +
+geom_point(alpha = 1, size = 3) +
+  xlab("Total Ecological Footprint") + ylab("Total Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  
+# Country and Total ecological footprint ----------------------------------
+
+africa %>% 
+  group_by(Country) %>% 
+  summarise(EcoFootprintMean = mean(Total.Ecological.Footprint, 
+  na.rm = TRUE)) %>% 
+  ungroup() %>%
+  mutate(Country = reorder(Country,EcoFootprintMean)) %>%
+  arrange(desc(EcoFootprintMean)) %>%
+  ggplot(aes(x = Country, y = EcoFootprintMean)) +
+  geom_bar(stat = "identity", fill = "#3288BD") +
+  geom_text(aes(x = Country, y = 1, label = paste("(" ,EcoFootprintMean,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = "black",
+            fontface = 'italic') +
+  labs(x = 'Country', 
+       y = 'Total Ecological Footprint Mean') +
+  coord_flip() + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Country and Total Biocapacity -------------------------------------------
+
+africa %>%
+  group_by(Country) %>%
+  summarise(BiocapacityMean = mean(Total.Biocapacity, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(Country = reorder(Country,BiocapacityMean)) %>%
+  arrange(desc(BiocapacityMean)) %>%
+  ggplot(aes(x = Country,y = BiocapacityMean)) +
+  geom_bar(stat='identity', fill = "#3288BD") +
+  geom_text(aes(x = Country, y = 1, label = paste0("(",BiocapacityMean,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = 'Country', 
+       y = 'Total Biocapacity mean') +
+    coord_flip()  + theme(legend.position = "none") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Biocapacity Def ---------------------------------------------------------
+
+ggplot(africa, aes(x = reorder(Country, -Biocapacity.Deficit.or.Reserve), y = Biocapacity.Deficit.or.Reserve)) +
+  geom_bar(stat = "identity", fill = "#3288BD") +
+  geom_text(aes(x = Country, y = 1, label = paste("(" ,Biocapacity.Deficit.or.Reserve,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = "black",
+            fontface = 'italic') +
+  labs(x = 'Country', 
+       y = 'Biocapacity (Deficit or Reserve)') +
+  coord_flip() + theme(legend.position = " ") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# HDI, Total Ecological Footprint and Population --------------------------
+
+africa %>% 
+  group_by(HDI, Country) %>% 
+  summarise(EcofooMean = mean(Total.Ecological.Footprint),
+            PopMean = mean(Population..millions.)) %>% 
+  ggplot(aes(x = HDI, y = EcofooMean, color = Country, size = PopMean)) +
+  geom_point(alpha = 0.7)  + ylab("Eco-Footprint") + 
+  xlab("Human Development Index") + ylab("Ecological Footprint Mean")+
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# HDI, Biocapacity and Population -----------------------------------------
+
+africa %>% 
+  group_by(HDI, Country) %>%
+  summarise(BiocapacityMean = mean(Total.Biocapacity),
+            MeanPop = mean(Population..millions.)) %>% 
+ggplot(aes(x = HDI, y = BiocapacityMean, color = Country, size = MeanPop)) +
+  geom_point(alpha=0.7) + 
+  ylab("Biocapacity") + 
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E" ,"#E6AB02" ,"#A6761D", "#FB8072", "#BEBADA", "#6a51a3")) + 
+  xlab("Human Development Index") + ylab("Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Cropland footprint ----------------------------------------------
+
+crop <- ggplot(africa, aes(x = reorder(Country, -Cropland.Footprint),y = Cropland.Footprint)) +
+  geom_bar(stat='identity', fill = "#6a51a3") +
+  geom_text(aes(x = Country, y = 0.15, label = paste0("(",Cropland.Footprint,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = ' ', 
+       y = 'Cropland Footprint') +
+  coord_flip()  + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Carbon Footprint --------------------------------------------------------
+
+Carbon <- ggplot(africa, aes(x = reorder(Country, -Carbon.Footprint),y = Carbon.Footprint)) +
+  geom_bar(stat='identity', fill = "#8c96c6") +
+  geom_text(aes(x = Country, y = 0.15, label = paste0("(",Carbon.Footprint,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = ' ', 
+       y = 'Carbon Footprint') +
+  coord_flip()  + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Fish Footprint ----------------------------------------------------------
+
+Fish <- ggplot(africa, aes(x = reorder(Country, -Fish.Footprint),y = Fish.Footprint)) +
+  geom_bar(stat='identity', fill = "#9ebcda") +
+  geom_text(aes(x = Country, y = 0.15, label = paste0("(",Carbon.Footprint,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = '', 
+       y = 'Fish Footprint') +
+  coord_flip()  + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Forest Footprint --------------------------------------------------------
+
+Forest <- ggplot(africa, aes(x = reorder(Country, -Forest.Footprint),y = Forest.Footprint)) +
+  geom_bar(stat='identity', fill = "#8c6bb1") +
+  geom_text(aes(x = Country, y = 0.15, label = paste0("(",Forest.Footprint,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = '', 
+       y = 'Forest Footprint') +
+  coord_flip()  + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Grazing Footprint -------------------------------------------------------
+
+Grazing <- ggplot(africa, aes(x = reorder(Country, -Grazing.Footprint),y = Grazing.Footprint)) +
+  geom_bar(stat='identity', fill = "#9e9ac8") +
+  geom_text(aes(x = Country, y = 0.15, label = paste0("(",Grazing.Footprint,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'italic') +
+  labs(x = '', 
+       y = 'Grazing Footprint') +
+  coord_flip()  + theme(legend.position = "") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+# Put biocapacity graphs together -------------------------------------------------------
+
+ecoprint <- ggarrange(crop, Forest, Carbon, Grazing, Fish, labels = c("A", "B", "C", "D", "E")) 
+
+annotate_figure(ecoprint, left = text_grob("Country", color = "Black", rot = 90),
+                fig.lab = "", fig.lab.face = "bold")
+```
+*Statistical analysis* 
+
+Statistical analyses were done for comparison of the various variables within the data set. The total ecological footprint, total biocapacity, and their contributing factors as well as the population were tested. Before any statistical tests could be done, the assumptions were first checked for each variable. These assumptions included the normality and the heteroscedasticity tests. 
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+#Normality
+
+shapiro.test(africa$Total.Ecological.Footprint) 
+shapiro.test(africa$Population..millions.) 
+shapiro.test(africa$Total.Biocapacity) 
+
+#Homoscedasticity
+
+var(africa$Total.Ecological.Footprint)
+```
+Due to the data violating the assumptions, non-normal distribution tests were run. The Kendall rank correlation was used to analyse the potential relationship between the variables. 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+#Total.Biocapacity vs Total.Ecological.Footprint
+
+cor.test(x = africa$Total.Biocapacity, africa$Total.Ecological.Footprint,
+                use = "everything", method = "kendall")
+
+#Total.Biocapacity vs Population
+
+cor.test(x = africa$Total.Biocapacity, africa$Population..millions.,
+          use = "everything", method = "kendall")  
+
+#Total.Ecological.Footprint VS Population
+
+cor.test(x = africa$Population..millions., africa$Total.Ecological.Footprint,
+           use = "everything", method = "kendall")
+```
+A multiple correlation plot was made in order to compare the relationship of the Ecological footprint variables and the biocapacity variables. 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+#Biocapacity variables
+afr_sub <- africa%>% 
+  select(Total.Biocapacity:Total.Ecological.Footprint)
+
+afr_cor <- cor(afr_sub)
+
+afr_cor
+
+corrplot(afr_cor, type = "upper", order="FPC",
+         col=brewer.pal(n=10, name="PuOr"))
+
+#Ecological Footprint variables
+afr_sub2 <- africa %>% 
+  select(-Population..millions., -Country, -Urban.Land, -Grazing.Land, -Forest.Land, -Fishing.Water, -Cropland, -HDI, -Countries.Required
+         , -GDP.per.Capita, -Data.Quality, -Earths.Required, -Biocapacity.Deficit.or.Reserve, -Region, -Development_status)
+
+afr_cor2 <- cor(afr_sub2)
+
+corrplot(afr_cor2, type="upper", order="FPC",
+col=brewer.pal(n=10, name="PuOr"))
+
+```
+A linear regression model was done to display a graphical representation of the relationships of the various variables. 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
+#Total.Biocapacity vs Total.Ecological.Footprint
+africa_lm <- lm(Total.Biocapacity ~ Total.Ecological.Footprint, data = africa)
+
+summary(africa_lm)  
+
+slope <- round(africa_lm$coef[2], 3)
+
+p.val <- round(coefficients(summary(africa_lm))[2, 4], 3)
+
+r2 <- round(summary(africa_lm)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Total.Biocapacity, y = Total.Ecological.Footprint)) +
+  geom_point() +
+  annotate("text", x = 0, y = 5, label = paste0("slope == ", slope, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(x = "Total Biocapacity",
+       y = "Total Ecological Footprint") +
+theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+#Total.Biocapacity vs Population
+
+africa_lm1 <- lm(Total.Biocapacity ~ Population..millions., data = africa)
+
+summary(africa_lm1) slope_1 <- round(africa_lm1$coef[2], 3)
+
+p.val_1 <- round(coefficients(summary(africa_lm1))[2, 4], 3)
+
+r2_1 <- round(summary(africa_lm1)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Population..millions., y = Total.Biocapacity)) +
+  geom_point() +
+  annotate("text", x = 55, y = 21, label = paste0("slope == ", slope_1, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 55, y = 19., label = paste0("italic(p) < ", p.val_1), parse = TRUE, hjust = 0) +
+  annotate("text", x = 55, y = 17, label = paste0("italic(r)^2 == ", r2_1), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(x = "Population (million)",
+       y = "Total.Biocapacity") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+#Total.Ecological.Footprint VS Population
+
+africa_lm2 <- lm(Total.Ecological.Footprint ~ Population..millions., data = africa)
+
+summary(africa_lm2)  
+
+slope_2 <- round(africa_lm2$coef[2], 3)
+
+p.val_2 <- round(coefficients(summary(africa_lm2))[2, 4], 3)
+
+r2_2 <- round(summary(africa_lm2)$r.squared, 3)
+
+ggplot(data = africa, aes(x = Population..millions., y = Total.Ecological.Footprint)) +
+  geom_point() +
+  annotate("text", x = 0, y = 5, label = paste0("slope == ", slope_2, "~(min/min)"), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.75, label = paste0("italic(p) < ", p.val_2), parse = TRUE, hjust = 0) +
+  annotate("text", x = 0, y = 4.5, label = paste0("italic(r)^2 == ", r2_2), parse = TRUE, hjust = 0) +
+  stat_smooth(method = "lm", colour = "salmon") +
+  labs(x = "Population (million).",
+       y = "Total Ecological Footprint") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+
+
+```
+
+
+##Results 
+
+In figure 1, there is a clear trend that there is no strong positive relationship that occurs between Total biocapacity and total ecological footprint within the selected African countries (p-value < 0.1557, tau = 0.377778). The Kendall rank correlation coefficient shows that approximately 38% of variance is explained by the relationship between the variables. 
+
+In figure 2, the linear regression model supports the kendall rank correlation suggesting that there is no strong positive relationship between total ecological footprint and total biocapacity (p < 0.843, r2 = 0.006). The r2 value shows that approximately 0.6% of variance is explained by this relationship. The slope of -0.594 suggests that the relationship is a negative one.
+
+In figure 3, Botswana has the highest total ecological footprint with a mean of 3.83 whereas Malawi has the lowest total ecological footprint with a mean of 0.81. 
+
+Gabon shows to have a higher total biocapacity in comparison to the other selected African countries (Figure 4). It is also apparent that Mauritius, Uganda, Egypt and Togo have an approximately similar total biocapacity as their mean ranges from 1.03 to 1.29, (Figure 4).
+
+In contrast to the other select countries, Congo and Gabon possess a positive Biocapacity deficit with Gabons’ being the highest with 24.29, (Figure 5). 
+
+In figure 6, it is apparent that the data is scattered, the countries with a relatively small population mean has a high ecological footprint mean and human development index whereas the intermediately populated countries possess a low ecological footprint and human development index.
+
+In figure 7, it is apparent that the data is scattered, the countries with a relatively small population mean has a high ecological footprint mean and human development index whereas the intermediately populated countries possess a low ecological footprint and human development index. There is a positive relationship between the population of the countries and the total ecological footprint (p < 0.3807, tau = -0.2444). The kendall rank coefficient shows that discordant relationship between the population and total biocapacity.
+
+Figure 8 shows that  the linear regression model supports the kendall rank correlation suggesting that there is  strong relationship between total ecological footprint and total biocapacity (p < 0.862, r2 = 0.004). The r2 value shows that approximately 0.4% of variance is explained by this relationship. The slope of -0.003 suggests that the relationship is a negative one.
+
+The countries with a relatively high population mean has a low biocapacity whereas the smaller populated countries have a scattered distribution in terms of both human development index and biocapacity. The intermediate populated countries tend to a very low human development index and biocapacity relationship, (Figure 9). There is a positive relationship between the population and the total biocapity (p < 0.1083, tau = -0.422222). The kendall rank coefficient shows that there is a conflictting relationship between the population and total biocapacity
+
+In figure 10, the linear regression model supports the kendall rank correlation suggesting that there is  strong relationship between total ecological footprint and total biocapacity (p < 0.301, r2 = 0.151). The r2 value shows that approximately 16% of variance is explained by this relationship. The slope of -0.119 suggests that the relationship is a negative one.
+
+Figure 11 illustrates a clear variation in the relationship of various ecological footprints with selected African countries. 
+
+In figure 11, there is a clear relationship with the various biocapacities. The strongest correlations illustrated is with the fishing water and forest land, the forest land and the grazing land, and the total biocapacity with the forest land, fishing water and the grazing land.
+
+In figure 12, the relationship between ecological footprint variables is not as strong as the biocapacity variables. The total biocapcity has a strong relation to the forest footprint and the total ecological footprint has a strong correlation with the carbon footprint. 
+
+Overall results suggest that there is a negative relationship between the population and the ecological footprints and biocapacity. From the results, it can be inferred that there is an indirect relationship between the various variables. In other words, as one increase the other decreases. The results rejected the null hypothesis. 
+
+##Discussion
+
+##Acknowledgements
+
+Contributions  
+Luanne Thomas: 
+R Markdown, Methods and Materials and Results (including data analysis)  
+Luvuyo Kani:
+Discussion and Conclusion  
+Demi-Leigh Martin:
+Abstract, Introduction,Reference List and Created Github repository
+
+
+\newpage
+##Appendix
+
+![](Rplot1.jpeg) 
+
+Figure 1. The relationship between the total biocapacity and the total ecological footprint
+
+![](Rplot2.jpeg) 
+
+Figure 2. Linear regression model of the total biocapcity and the total ecological footprint of each country 
+
+![](Rplot3.jpeg)
+
+Figure 3. The total ecological footprint mean of each country
+
+![](Rplot4.jpeg)
+
+Figure 4. The total biocapacity mean of each country
+
+![](Rplot5.jpeg)
+
+Figure 5. The biocapacity (deficit or reserve) of each country
+
+![](Rplot6.jpeg)
+
+Figure 6. The relationship between the total ecological footprint, human development index and the population mean of each country 
+
+![](Rplot7.jpeg)
+
+Figure 7. Linear regression model of the population and the total ecological footprint of each country 
+
+![](Rplot8.jpeg)
+
+Figure 8. The relationship between the total biocapacity, human development index and the population mean of each country 
+
+![](Rplot9.jpeg)
+
+Figure 7. Linear regression model of the population and the total biocapacity of each country 
+
+![](Rplot10.jpeg)
+
+Figure 10.Ecological footprints (hectares per capita) 
+
+![](Rplot11.jpeg)
+
+Figure 11.Correlation plot between the biocapacity variables and the total ecological footprint
+
+![](Rplot12.jpeg)
+
+Figure 7. Correlation plot between the ecological footprint variables and the total biocapacity
+
+
+\newpage
+##References
+Anand S, Sen A. 2000. The Income Component of the Human Development Index. *Journal of Human Development* 1(1): 83–106.  
+Clancy J. 2008. Urban ecological footprints in Africa. **African Journal of Ecology* 46(4): 463-470.  
+Earth Overshoot Day. 2018. *Earth Overshoot Day 2018 new.* [Online] Available at: https://www.overshootday.org/ [Accessed 20 Jun. 2018].  
+Ehrlich P, Holdren NJ. 1971. Impact of Population Growth. *Obstetrical & Gynecological Survey* 26: 769–771.  
+Ewing B, Moore D, Goldfinger S, Ousler A, Reed A, Wackernagel M. 2010.*Ecological Footprint Atlas 2010.* Oakland: Global Footprint Network.  
+Heinberg R. 2007. Out of time?.*Public Policy Research* 14(3): 197–203.  
+Huijbregts M, Hellweg S, Frischknecht R, Hungerbühler K, Hendriks A. 2008. Ecological footprint accounting in the life cycle assessment of products. *Ecological Economics* 64(4): 798–807.  
+Millennium Ecosystem Assessment. 2005. *Ecosystems and Human Well-being: Synthesis.* Island Press, Washington, DC.  
+Lewin L. 2000. *Ecological Footprints and Biocapacity: Tools in Planning and Monitoring of Sustainable Development in an International Perspective.* Swedish Environmental Protection Agency.   
+The Economics of Ecosystems and Biodiversity. 2009. TEEB Climate Issues Update. September 2009.  
+Wackernagel M, Schulz N, Deumling D, Linares A, Jenkins M, Kapos V, Monfreda C, Loh J, Myers N, Norgaard R, Randers J. 2002.   Tracking the ecological overshoot of the human economy.*Proceedings of the National Academy of Sciences of the United States of America* 99(14): 9266–9271.  
+Wackernagel  M, Kitzes  J, Moran D, Goldfinger S, Thomas M. 2006. The Ecological Footprint of cities and regions: comparing resource availability with resource demand. *Environment and Urbanization* 18(1): 103–112.  
+Sayre AP. 1999. *Africa*. Twenty-First Century Books. ISBN 0-7613-1367-2.
+Shahid S. 2016. Earth Overshoot Day. *Landscape Middle East Magazine* 8: 8–9.
+
+
+
