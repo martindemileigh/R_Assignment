@@ -1,4 +1,4 @@
-#Luanne Thomas, Demi-Lee Martin & Luvuyo Kani
+#Luanne Thomas, Demi-Leigh Martin & Luvuyo Kani
 #26 June 2016
 #Statistical analysis of data
 
